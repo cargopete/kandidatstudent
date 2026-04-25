@@ -50,7 +50,7 @@ pub async fn reindex_all(db: &PgPool, meili: &Client) -> anyhow::Result<usize> {
             LEFT JOIN name_alias na ON na.target_kind = 'program_offering'
                                    AND na.target_id = po.id
             WHERE po.is_active
-            GROUP BY po.id, s.canonical_name_bg, i.slug, i.name_bg, i.short_name_bg,
+            GROUP BY po.id, s.slug, s.canonical_name_bg, i.slug, i.name_bg, i.short_name_bg,
                      i.city, i.ownership, pf.code
             ORDER BY po.id
             LIMIT $1 OFFSET $2

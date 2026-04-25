@@ -39,6 +39,7 @@ pub async fn reindex_all(db: &PgPool, meili: &Client) -> anyhow::Result<usize> {
                 i.city,
                 i.ownership::text             AS ownership,
                 pf.code                       AS professional_field_code,
+                po.program_page_url,
                 COALESCE(
                     ARRAY_AGG(na.alias_bg) FILTER (WHERE na.alias_bg IS NOT NULL),
                     '{}'
@@ -93,6 +94,7 @@ pub async fn reindex_all(db: &PgPool, meili: &Client) -> anyhow::Result<usize> {
                 duration_semesters:        r.duration_semesters,
                 last_verified_at:          r.last_verified_at.unwrap_or(0),
                 aliases:                   r.aliases.unwrap_or_default(),
+                program_page_url:          r.program_page_url,
             })
             .collect();
 

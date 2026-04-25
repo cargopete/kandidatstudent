@@ -1,6 +1,6 @@
 # Seed status — program_offering coverage
 
-Last updated: 2026-04-25
+Last updated: 2026-04-25 (batch 2 added)
 
 ## Legend
 - ✅ Complete (or near-complete)
@@ -165,11 +165,145 @@ Source: per-faculty pages at [uni-sofia.bg/index.php/bul/obrazovanie/bakalav_rsk
 
 ---
 
+---
+
+## Медицински университет – Пловдив (`mu-plovdiv`) ⚠️ ~45%
+
+**Seeded in:** `programs_batch2.sql` — 16 programs.
+
+| Unit | Programs | Status |
+|---|---|---|
+| Медицински факултет | Медицина (master, 12 sem) | ✅ |
+| Факултет по дентална медицина | Дентална медицина (master, 12 sem) | ✅ |
+| Фармацевтичен факултет | Фармация (master, 10 sem) | ✅ |
+| ФОЗ | Мед. сестра (0 лв.), Акушерка (0 лв.), Лекарски асистент, Управление на зд. грижи | ✅ |
+| МК Пловдив | Мед. лаборатория, Рентгенов лаборант, Зъботехник, Пом.-фармацевт, Рехабилитатор, Инспектор ОЗ, Мед. козметика, Медицински оптик, Инструктор диетично хранене | ✅ |
+| ФОЗ master-after-bachelor | ~8 магистратури | ❌ Not seeded |
+| Докторски програми | — | ❌ Not seeded |
+
+**New canonical specialties added:** `meditsinski-optik` (7.5), `instruktor-dietichno-hranene` (7.5).
+
+---
+
+## Медицински университет – Варна (`mu-varna`) ⚠️ ~50%
+
+**Seeded in:** `programs_batch2.sql` — 21 programs.
+
+| Unit | Programs | Status |
+|---|---|---|
+| Медицински факултет | Медицина bg + en (master, 12 sem), Дентална (12 sem), Фармация (10 sem) | ✅ |
+| ФОЗ Варна | Мед. сестра (0 лв.), Акушерка (0 лв.), Управление зд. грижи, Здравен мениджмънт, Кинезитерапия, Логопедия, Биомедицинска техника | ✅ |
+| МК Варна | Мед. лаборатория, Рентгенов лаборант, Зъботехник, Пом.-фармацевт, Рехабилитатор, Инспектор ОЗ, Мед. козметика, Масажист | ✅ |
+| Филиали Сливен/Шумен/В.Търново | Мед. сестра, Акушерка | ❌ Deferred — branch_id needed |
+| Master-after-bachelor & doctoral | — | ❌ Not seeded |
+
+**New canonical specialty added:** `biomedicinska-tehnika` (5.2).
+**Fees note:** English medicine tuition (paid only) not confirmed — stored as NULL.
+
+---
+
+## Великотърновски университет „Св. св. Кирил и Методий" (`vtu-vt`) ⚠️ ~41%
+
+**Seeded in:** `programs_batch2.sql` — 28 of ~68 bachelor/master programs.
+
+### Seeded
+2.1: Българска филология, Английска филология
+2.2: История, Археология
+2.3: Философия
+2.4: Теология
+3.1: Социология
+3.2: Психология
+3.4: Социална педагогика, Социална работа
+3.6: Право (master, 10 sem)
+3.7: Стопанско управление
+3.8: Икономика, Финанси
+3.9: Туризъм
+1.2: Педагогика, Начална педагогика, Предучилищна педагогика, Специална педагогика
+4.5: Математика
+4.6: Информатика, Компютърни науки
+5.7: Строително инженерство, Геодезия
+8.2: Изобразително изкуство, Музика, Хореография
+
+### Missing (~40 programs)
+- Педагогически колеж Плевен (branch_id needed): ~10 prof-bachelor programs
+- Филиал Враца (branch_id needed): education specialties
+- Remaining language/philology programs (Руска, Германска, Романска, Турска, etc.)
+- Natural sciences (Биология, Химия, Физика, Екология — НПФ faculty)
+- ФМИ specialties: Приложна математика, Статистика, педагогически варианти
+- Engineering programs (Строителство variants, УСП)
+- All master-after-bachelor programs (~20)
+
+**Fees:** NULL — exact МОН order not found in research report.
+
+---
+
+## Нов български университет (`nbu-sofia`) ⚠️ ~30%
+
+**Seeded in:** `programs_batch2.sql` — 15 of ~50 programs.
+
+### Seeded
+3.5: Журналистика, Кино и телевизия
+3.6: Право (master, 10 sem)
+3.7: Публична администрация, Бизнес администрация
+3.8: Икономика, Маркетинг
+3.1: Социология
+3.2: Психология
+3.3: Политология, Международни отношения
+2.2: История
+4.6: Компютърни науки
+5.3: Информационни технологии
+5.7: Архитектура (master, 10 sem)
+
+### Missing (~35 programs)
+- Liberal arts / humanities bachelors (Философия, Антропология, Книгоиздаване, Графичен дизайн, Мода)
+- Science programs (Психоанализа, Когнитивни науки)
+- Distance/online variants (НБУ offers many programs in e-learning mode)
+- Per-program semester fees — source: нбу.bg/faculties (not machine-readable)
+
+**Fees:** NULL — НБУ publishes per-semester prices per program; not centrally aggregated.
+
+---
+
+## Югозападен университет „Неофит Рилски" (`swu-blagoevgrad`) ⚠️ ~24%
+
+**Seeded in:** `programs_batch2.sql` — 20 of ~84 programs.
+
+### Seeded
+2.2: История
+2.3: Философия
+3.1: Социология
+3.2: Психология
+3.4: Социална педагогика, Социална работа
+3.6: Право (master, 10 sem)
+3.7: Публична администрация
+3.8: Икономика, Маркетинг
+3.9: Туризъм
+1.2: Педагогика, Начална педагогика, Предучилищна педагогика, Специална педагогика
+4.3: Биология
+4.5: Математика
+4.6: Информатика
+8.2: Изобразително изкуство, Музика
+
+### Missing (~64 programs)
+Source: swu.bg (9 faculties)
+- Правно-исторически: Документалистика, Европейски изследвания, допълнителни
+- Педагогически: Логопедия, Кинезитерапия, НУП с чужд език, ПУП с чужд език
+- Природо-математически: Физика, Химия, Екология, География, pedob variants
+- Технически: Механика, Електроника, Компютърни системи, Хранителни технологии
+- Икономически: Финанси, Счетоводство, МИО, Туристически бизнес
+- Художествено-педагогически: Дизайн, Хореография, Театрознание
+- Филологически: 10+ language philologies, Приложна лингвистика
+- Health-adjacent programs
+
+**Fees:** NULL — exact per-program fees not published in machine-readable form.
+
+---
+
 ## How to backfill
 
-1. **Quick wins** — add missing canonical specialty slugs in `seeds/specialties.sql` for conflicting ТУ-С programs, then append rows to `programs_batch1.sql` (or create `programs_batch2.sql`)
-2. **ПУ / СУ full coverage** — fetch the faculty specialty pages listed above and extract program names; the URL structure is stable
-3. **УНСС full list** — parse [priem.unwe.bg/Uploads/Priem/Specialnosti UNWE 2025.pdf](https://priem.unwe.bg/Uploads/Priem/Specialnosti%20UNWE%202025.pdf)
-4. **Branches** (Враца, ТКС, Смолян, Кърджали) — seed `institution_branch` rows first, then link programs via `branch_id`
+1. **Branch programs** — `seeds/institution_branches.sql` is now seeded (44 branch rows). Link deferred filial programs (МУ-С Враца, МУ-В Сливен/Шумен/В.Търново, ВТУ Враца, ПУ Кърджали/Смолян, ТКС) via `branch_id` in a new `programs_batch3.sql`
+2. **Quick wins** — add missing canonical specialty slugs in `seeds/specialties.sql` for conflicting ТУ-С programs, then append rows to `programs_batch3.sql`
+3. **ПУ / СУ full coverage** — fetch the faculty specialty pages listed above and extract program names; the URL structure is stable
+4. **УНСС full list** — parse [priem.unwe.bg/Uploads/Priem/Specialnosti UNWE 2025.pdf](https://priem.unwe.bg/Uploads/Priem/Specialnosti%20UNWE%202025.pdf)
 5. **Fees** — СУ full fee table is a single PDF/page; once fetched, add `tuition_bgn_per_year` via UPDATE
-6. **Remaining HEIs** (ВТУ, ШУ, РУ, БДУ, ТрУ, ИУ-В, НБУ, and the other 44 institutions) — not started; NACID RVU API at [rvu.nacid.bg/specialities](https://rvu.nacid.bg/specialities) is the canonical source for a bulk scrape
+6. **Remaining HEIs** (ШУ, РУ, БДУ, ТрУ, ИУ-В, and the other 40 institutions) — not started; NACID RVU API at [rvu.nacid.bg/specialities](https://rvu.nacid.bg/specialities) is the canonical source for a bulk scrape

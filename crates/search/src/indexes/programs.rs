@@ -80,4 +80,5 @@ pub struct ProgramDoc {
     pub duration_semesters:       i16,
     pub last_verified_at:         i64, // Unix timestamp for sorting
     pub aliases:                  Vec<String>,
+    pub program_page_url:         Option<String>,
 }

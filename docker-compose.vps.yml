@@ -10,7 +10,7 @@ services:
 
   api:
     ports:
-      - "127.0.0.1:8082:8080"
+      - "8082:8080"   # public — caddy reverse-proxies on the domain; direct IP used by Vercel build
 
   admin:
     ports:

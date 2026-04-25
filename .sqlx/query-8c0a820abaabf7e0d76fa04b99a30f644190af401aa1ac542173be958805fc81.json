@@ -1,0 +1,92 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT id, program_offering_id, academic_year,\n                   quota AS \"quota: _\",\n                   ranking_round, min_bal, max_bal, seats_filled,\n                   source_url, created_at\n            FROM min_bal_history\n            WHERE program_offering_id = $1\n            ORDER BY academic_year DESC, ranking_round ASC\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "program_offering_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "academic_year",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "quota: _",
+        "type_info": {
+          "Custom": {
+            "name": "quota_kind",
+            "kind": {
+              "Enum": [
+                "regular_male",
+                "regular_female",
+                "regular_unisex",
+                "paid",
+                "foreign_eu",
+                "foreign_non_eu",
+                "disadvantaged",
+                "teacher_programme"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "ordinal": 4,
+        "name": "ranking_round",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 5,
+        "name": "min_bal",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 6,
+        "name": "max_bal",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 7,
+        "name": "seats_filled",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 8,
+        "name": "source_url",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 9,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  "hash": "8c0a820abaabf7e0d76fa04b99a30f644190af401aa1ac542173be958805fc81"
+}

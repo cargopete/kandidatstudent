@@ -1,0 +1,30 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO salary_outcome\n                (institution_id, professional_field_id, academic_year,\n                 avg_monthly_income_bgn, unemployment_pct,\n                 employed_in_field_pct, higher_ed_job_pct, source, source_url)\n            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)\n            ON CONFLICT (institution_id, professional_field_id, academic_year, source)\n            DO UPDATE SET\n                avg_monthly_income_bgn = EXCLUDED.avg_monthly_income_bgn,\n                unemployment_pct       = EXCLUDED.unemployment_pct,\n                employed_in_field_pct  = EXCLUDED.employed_in_field_pct,\n                higher_ed_job_pct      = EXCLUDED.higher_ed_job_pct,\n                source_url             = EXCLUDED.source_url\n            RETURNING id\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Int8",
+        "Text",
+        "Numeric",
+        "Numeric",
+        "Numeric",
+        "Numeric",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "71c70a6a4a05598715292581f3fb641b8c1d2bde83812fbbbb41bb62598fdb71"
+}

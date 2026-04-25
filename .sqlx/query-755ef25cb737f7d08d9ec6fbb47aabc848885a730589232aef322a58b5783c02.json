@@ -1,0 +1,37 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO admission_cycle (\n                program_offering_id, academic_year,\n                seats_total, seats_state_subsidised, seats_paid,\n                seats_foreign_eu, seats_foreign_non_eu,\n                application_opens, application_closes,\n                exam_session_start, exam_session_end,\n                ranking_rounds, tuition_bgn, tuition_currency,\n                formula_bg, source_url\n            ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)\n            ON CONFLICT (program_offering_id, academic_year) DO UPDATE SET\n                seats_total            = EXCLUDED.seats_total,\n                seats_state_subsidised = EXCLUDED.seats_state_subsidised,\n                seats_paid             = EXCLUDED.seats_paid,\n                seats_foreign_eu       = EXCLUDED.seats_foreign_eu,\n                seats_foreign_non_eu   = EXCLUDED.seats_foreign_non_eu,\n                application_opens      = EXCLUDED.application_opens,\n                application_closes     = EXCLUDED.application_closes,\n                exam_session_start     = EXCLUDED.exam_session_start,\n                exam_session_end       = EXCLUDED.exam_session_end,\n                ranking_rounds         = EXCLUDED.ranking_rounds,\n                tuition_bgn            = EXCLUDED.tuition_bgn,\n                formula_bg             = EXCLUDED.formula_bg,\n                source_url             = EXCLUDED.source_url,\n                updated_at             = now()\n            RETURNING id\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text",
+        "Int4",
+        "Int4",
+        "Int4",
+        "Int4",
+        "Int4",
+        "Date",
+        "Date",
+        "Date",
+        "Date",
+        "Int2",
+        "Numeric",
+        "Bpchar",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "755ef25cb737f7d08d9ec6fbb47aabc848885a730589232aef322a58b5783c02"
+}

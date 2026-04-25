@@ -1,0 +1,20 @@
+[package]
+name    = "scraper-bg"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+domain        = { path = "../domain" }
+scraper-core  = { path = "../scraper-core" }
+reqwest       = { workspace = true }
+scraper       = { workspace = true }
+url           = { workspace = true }
+serde         = { workspace = true }
+serde_json    = { workspace = true }
+chrono        = { workspace = true }
+tokio         = { workspace = true }
+tracing       = { workspace = true }
+anyhow        = { workspace = true }
+thiserror     = { workspace = true }

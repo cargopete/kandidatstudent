@@ -1,0 +1,76 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT id, code, area_code, area_name_bg, name_bg, name_en,\n                   is_priority, is_protected, is_regulated, created_at\n            FROM professional_field\n            WHERE code = $1\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "code",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "area_code",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "area_name_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "name_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "name_en",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "is_priority",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 7,
+        "name": "is_protected",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 8,
+        "name": "is_regulated",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 9,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "73adec19ed9c34a8c16ada82d6a98a4e2c5acd1dc3b0b13194de82781d8ac7eb"
+}

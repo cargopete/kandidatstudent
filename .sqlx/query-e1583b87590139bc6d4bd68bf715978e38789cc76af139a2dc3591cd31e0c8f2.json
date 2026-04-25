@@ -1,0 +1,130 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT id, program_offering_id, academic_year,\n                   seats_total, seats_state_subsidised, seats_paid,\n                   seats_foreign_eu, seats_foreign_non_eu,\n                   application_opens, application_closes,\n                   exam_session_start, exam_session_end,\n                   ranking_rounds, tuition_bgn, tuition_currency,\n                   formula_bg, source_url, created_at, updated_at\n            FROM admission_cycle\n            WHERE program_offering_id = $1\n            ORDER BY academic_year DESC\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "program_offering_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "academic_year",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "seats_total",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 4,
+        "name": "seats_state_subsidised",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 5,
+        "name": "seats_paid",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 6,
+        "name": "seats_foreign_eu",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 7,
+        "name": "seats_foreign_non_eu",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 8,
+        "name": "application_opens",
+        "type_info": "Date"
+      },
+      {
+        "ordinal": 9,
+        "name": "application_closes",
+        "type_info": "Date"
+      },
+      {
+        "ordinal": 10,
+        "name": "exam_session_start",
+        "type_info": "Date"
+      },
+      {
+        "ordinal": 11,
+        "name": "exam_session_end",
+        "type_info": "Date"
+      },
+      {
+        "ordinal": 12,
+        "name": "ranking_rounds",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 13,
+        "name": "tuition_bgn",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 14,
+        "name": "tuition_currency",
+        "type_info": "Bpchar"
+      },
+      {
+        "ordinal": 15,
+        "name": "formula_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 16,
+        "name": "source_url",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 17,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 18,
+        "name": "updated_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "e1583b87590139bc6d4bd68bf715978e38789cc76af139a2dc3591cd31e0c8f2"
+}

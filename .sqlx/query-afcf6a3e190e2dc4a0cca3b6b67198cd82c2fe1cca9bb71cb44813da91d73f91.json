@@ -1,0 +1,44 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            (SELECT count(*) FROM institution)      AS institutions,\n            (SELECT count(*) FROM professional_field) AS professional_fields,\n            (SELECT count(*) FROM specialty)        AS specialties,\n            (SELECT count(*) FROM program_offering WHERE is_active) AS programs,\n            (SELECT max(last_run_at) FROM scrape_job) AS last_scrape_at\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "institutions",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "professional_fields",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "specialties",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 3,
+        "name": "programs",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "last_scrape_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "hash": "afcf6a3e190e2dc4a0cca3b6b67198cd82c2fe1cca9bb71cb44813da91d73f91"
+}

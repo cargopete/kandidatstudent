@@ -1,0 +1,29 @@
+[package]
+name    = "scraper-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+domain       = { path = "../domain" }
+persistence  = { path = "../persistence" }
+reqwest      = { workspace = true }
+scraper      = { workspace = true }
+url          = { workspace = true }
+robotstxt    = { workspace = true }
+bytes        = { workspace = true }
+aws-config   = { workspace = true }
+aws-sdk-s3   = { workspace = true }
+serde        = { workspace = true }
+serde_json   = { workspace = true }
+chrono       = { workspace = true }
+uuid         = { workspace = true }
+tokio        = { workspace = true }
+tracing      = { workspace = true }
+anyhow       = { workspace = true }
+thiserror    = { workspace = true }
+jsonschema   = { workspace = true }
+async-trait  = { workspace = true }
+sha2         = { workspace = true }
+hex          = { workspace = true }

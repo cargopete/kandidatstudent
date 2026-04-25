@@ -1,0 +1,29 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO professional_field\n                (code, area_code, area_name_bg, name_bg, name_en, is_priority, is_protected, is_regulated)\n            VALUES ($1,$2,$3,$4,$5,$6,$7,$8)\n            ON CONFLICT (code) DO UPDATE SET\n                area_code    = EXCLUDED.area_code,\n                area_name_bg = EXCLUDED.area_name_bg,\n                name_bg      = EXCLUDED.name_bg,\n                name_en      = EXCLUDED.name_en,\n                is_priority  = EXCLUDED.is_priority,\n                is_protected = EXCLUDED.is_protected,\n                is_regulated = EXCLUDED.is_regulated\n            RETURNING id\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Bool",
+        "Bool",
+        "Bool"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "813b06d7d6d5e182396fe381d6baa9e0d0915850cd152074b74b6ef1bbc787ee"
+}

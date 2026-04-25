@@ -1,0 +1,18 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO professional_field (code, area_code, area_name_bg, name_bg, name_en)\n            VALUES ($1,$2,$3,$4,$5)\n            ON CONFLICT (code) DO NOTHING\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "afec31a38763bccfd67880b9c75ee80d27521f1e2a78494960087536a5696fc1"
+}

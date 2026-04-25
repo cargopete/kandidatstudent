@@ -1,0 +1,97 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT id, scrape_job_id, status AS \"status: _\",\n                   started_at, finished_at, rows_found, rows_upserted, rows_deleted,\n                   error_message, log_s3_key, snapshot_id\n            FROM scrape_run\n            WHERE ($1::text IS NULL OR status::text = $1)\n            ORDER BY started_at DESC\n            LIMIT $2\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "scrape_job_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "status: _",
+        "type_info": {
+          "Custom": {
+            "name": "scrape_status",
+            "kind": {
+              "Enum": [
+                "pending",
+                "running",
+                "ok",
+                "failed",
+                "partial",
+                "skipped"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "ordinal": 3,
+        "name": "started_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 4,
+        "name": "finished_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 5,
+        "name": "rows_found",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 6,
+        "name": "rows_upserted",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 7,
+        "name": "rows_deleted",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 8,
+        "name": "error_message",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 9,
+        "name": "log_s3_key",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 10,
+        "name": "snapshot_id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "hash": "2c431280baaf58d5b5896a9c98466c1dd8540f6a0d27d38767d9c96bb21f3fa8"
+}

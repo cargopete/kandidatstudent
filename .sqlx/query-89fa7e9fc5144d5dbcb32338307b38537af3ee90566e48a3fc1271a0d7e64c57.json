@@ -1,0 +1,105 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO program_offering (\n                slug, institution_id, branch_id, academic_unit_id,\n                specialty_id, professional_field_id,\n                oks_level, study_form, language,\n                duration_semesters, ects_credits,\n                tuition_bgn_per_year, tuition_currency, funding,\n                is_joint, has_internship,\n                title_bg, title_en, description_bg,\n                learning_outcomes_bg, career_prospects_bg,\n                curriculum_url, program_page_url, accreditation_until,\n                is_active, last_verified_at\n            ) VALUES (\n                $1,$2,$3,$4,$5,$6,\n                $7::oks_level, $8::study_form, $9::language_code,\n                $10,$11,$12,$13,$14::funding_source,\n                $15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26\n            )\n            ON CONFLICT (slug) DO UPDATE SET\n                branch_id             = EXCLUDED.branch_id,\n                academic_unit_id      = EXCLUDED.academic_unit_id,\n                oks_level             = EXCLUDED.oks_level,\n                study_form            = EXCLUDED.study_form,\n                language              = EXCLUDED.language,\n                duration_semesters    = EXCLUDED.duration_semesters,\n                ects_credits          = EXCLUDED.ects_credits,\n                tuition_bgn_per_year  = EXCLUDED.tuition_bgn_per_year,\n                funding               = EXCLUDED.funding,\n                is_joint              = EXCLUDED.is_joint,\n                has_internship        = EXCLUDED.has_internship,\n                title_bg              = EXCLUDED.title_bg,\n                title_en              = EXCLUDED.title_en,\n                description_bg        = EXCLUDED.description_bg,\n                learning_outcomes_bg  = EXCLUDED.learning_outcomes_bg,\n                career_prospects_bg   = EXCLUDED.career_prospects_bg,\n                curriculum_url        = EXCLUDED.curriculum_url,\n                program_page_url      = EXCLUDED.program_page_url,\n                accreditation_until   = EXCLUDED.accreditation_until,\n                is_active             = EXCLUDED.is_active,\n                last_verified_at      = EXCLUDED.last_verified_at,\n                updated_at            = now()\n            RETURNING id\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        {
+          "Custom": {
+            "name": "citext",
+            "kind": "Simple"
+          }
+        },
+        "Int8",
+        "Int8",
+        "Int8",
+        "Int8",
+        "Int8",
+        {
+          "Custom": {
+            "name": "oks_level",
+            "kind": {
+              "Enum": [
+                "professional_bachelor",
+                "bachelor",
+                "master",
+                "doctor"
+              ]
+            }
+          }
+        },
+        {
+          "Custom": {
+            "name": "study_form",
+            "kind": {
+              "Enum": [
+                "full_time",
+                "part_time",
+                "distance",
+                "evening",
+                "hybrid"
+              ]
+            }
+          }
+        },
+        {
+          "Custom": {
+            "name": "language_code",
+            "kind": {
+              "Enum": [
+                "bg",
+                "en",
+                "de",
+                "fr",
+                "ru",
+                "es",
+                "it",
+                "tr",
+                "other"
+              ]
+            }
+          }
+        },
+        "Int2",
+        "Int2",
+        "Numeric",
+        "Bpchar",
+        {
+          "Custom": {
+            "name": "funding_source",
+            "kind": {
+              "Enum": [
+                "state_subsidy",
+                "paid",
+                "both"
+              ]
+            }
+          }
+        },
+        "Bool",
+        "Bool",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Date",
+        "Bool",
+        "Timestamptz"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "89fa7e9fc5144d5dbcb32338307b38537af3ee90566e48a3fc1271a0d7e64c57"
+}

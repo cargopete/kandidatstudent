@@ -1,0 +1,9 @@
+pub mod institution;
+pub mod professional_field;
+pub mod specialty;
+pub mod program_offering;
+pub mod admission_cycle;
+pub mod min_bal_history;
+pub mod salary_outcome;
+pub mod scrape_job;
+pub mod pool;

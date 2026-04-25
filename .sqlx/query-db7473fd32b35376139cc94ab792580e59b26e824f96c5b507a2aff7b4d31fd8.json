@@ -1,0 +1,83 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT id, institution_id, professional_field_id, academic_year,\n                   avg_monthly_income_bgn, unemployment_pct,\n                   employed_in_field_pct, higher_ed_job_pct,\n                   source, source_url, created_at\n            FROM salary_outcome\n            WHERE ($1::bigint IS NULL OR institution_id = $1)\n              AND ($2::bigint IS NULL OR professional_field_id = $2)\n            ORDER BY academic_year DESC\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "institution_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "professional_field_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 3,
+        "name": "academic_year",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "avg_monthly_income_bgn",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 5,
+        "name": "unemployment_pct",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 6,
+        "name": "employed_in_field_pct",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 7,
+        "name": "higher_ed_job_pct",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 8,
+        "name": "source",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 9,
+        "name": "source_url",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 10,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      false
+    ]
+  },
+  "hash": "db7473fd32b35376139cc94ab792580e59b26e824f96c5b507a2aff7b4d31fd8"
+}

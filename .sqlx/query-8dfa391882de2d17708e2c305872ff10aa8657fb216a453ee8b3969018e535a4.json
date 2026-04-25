@@ -1,0 +1,165 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT\n                po.id,\n                po.slug,\n                po.title_bg,\n                po.title_en,\n                po.description_bg,\n                po.career_prospects_bg,\n                po.oks_level::text            AS oks_level,\n                po.study_form::text           AS study_form,\n                po.language::text             AS language,\n                po.is_joint,\n                po.has_internship,\n                po.funding::text              AS funding,\n                po.tuition_bgn_per_year,\n                po.duration_semesters,\n                EXTRACT(EPOCH FROM po.last_verified_at)::bigint AS last_verified_at,\n                s.canonical_name_bg           AS specialty_name_bg,\n                i.slug                        AS institution_slug,\n                i.name_bg                     AS institution_name_bg,\n                i.short_name_bg               AS institution_short_name_bg,\n                i.city,\n                i.ownership::text             AS ownership,\n                pf.code                       AS professional_field_code,\n                COALESCE(\n                    ARRAY_AGG(na.alias_bg) FILTER (WHERE na.alias_bg IS NOT NULL),\n                    '{}'\n                )                             AS aliases\n            FROM program_offering po\n            JOIN institution i    ON i.id = po.institution_id\n            JOIN specialty s      ON s.id = po.specialty_id\n            JOIN professional_field pf ON pf.id = po.professional_field_id\n            LEFT JOIN name_alias na ON na.target_kind = 'program_offering'\n                                   AND na.target_id = po.id\n            WHERE po.is_active\n            GROUP BY po.id, s.canonical_name_bg, i.slug, i.name_bg, i.short_name_bg,\n                     i.city, i.ownership, pf.code\n            ORDER BY po.id\n            LIMIT $1 OFFSET $2\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "slug",
+        "type_info": {
+          "Custom": {
+            "name": "citext",
+            "kind": "Simple"
+          }
+        }
+      },
+      {
+        "ordinal": 2,
+        "name": "title_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "title_en",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "description_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "career_prospects_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "oks_level",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 7,
+        "name": "study_form",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 8,
+        "name": "language",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 9,
+        "name": "is_joint",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 10,
+        "name": "has_internship",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 11,
+        "name": "funding",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 12,
+        "name": "tuition_bgn_per_year",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 13,
+        "name": "duration_semesters",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 14,
+        "name": "last_verified_at",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 15,
+        "name": "specialty_name_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 16,
+        "name": "institution_slug",
+        "type_info": {
+          "Custom": {
+            "name": "citext",
+            "kind": "Simple"
+          }
+        }
+      },
+      {
+        "ordinal": 17,
+        "name": "institution_name_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 18,
+        "name": "institution_short_name_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 19,
+        "name": "city",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 20,
+        "name": "ownership",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 21,
+        "name": "professional_field_code",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 22,
+        "name": "aliases",
+        "type_info": "TextArray"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      null,
+      null,
+      null,
+      false,
+      false,
+      null,
+      true,
+      false,
+      null,
+      false,
+      false,
+      false,
+      false,
+      false,
+      null,
+      false,
+      null
+    ]
+  },
+  "hash": "8dfa391882de2d17708e2c305872ff10aa8657fb216a453ee8b3969018e535a4"
+}

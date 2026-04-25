@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProgramExtract v1",
+  "type": "object",
+  "required": ["source_url", "scraped_at", "institution_slug", "items"],
+  "properties": {
+    "source_url":       { "type": "string", "format": "uri" },
+    "scraped_at":       { "type": "string", "format": "date-time" },
+    "scraper":          { "type": "string", "enum": ["reqwest", "playwright"] },
+    "institution_slug": { "type": "string" },
+    "snapshot_sha256":  { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title_bg", "oks_level", "study_form", "language"],
+        "properties": {
+          "external_id":             { "type": "string" },
+          "title_bg":                { "type": "string", "minLength": 1 },
+          "title_en":                { "type": "string" },
+          "specialty_hint_bg":       { "type": "string" },
+          "professional_field_code": { "type": "string", "pattern": "^\\d+(\\.\\d+)?$" },
+          "academic_unit":           { "type": "string" },
+          "branch_city":             { "type": "string" },
+          "oks_level": {
+            "enum": ["professional_bachelor", "bachelor", "master", "doctor"]
+          },
+          "study_form": {
+            "enum": ["full_time", "part_time", "distance", "evening", "hybrid"]
+          },
+          "language": {
+            "enum": ["bg", "en", "de", "fr", "ru", "es", "it", "tr", "other"]
+          },
+          "duration_semesters":    { "type": "integer", "minimum": 2, "maximum": 16 },
+          "ects_credits":          { "type": "integer", "minimum": 30, "maximum": 480 },
+          "tuition_bgn_per_year":  { "type": "number", "minimum": 0 },
+          "funding": {
+            "enum": ["state_subsidy", "paid", "both"]
+          },
+          "description_bg":   { "type": "string" },
+          "curriculum_url":   { "type": "string", "format": "uri" },
+          "program_page_url": { "type": "string", "format": "uri" },
+          "is_joint":         { "type": "boolean" },
+          "joint_partner": {
+            "type": "object",
+            "properties": {
+              "name":         { "type": "string" },
+              "country_iso2": { "type": "string" }
+            }
+          },
+          "admission": {
+            "type": "object",
+            "properties": {
+              "academic_year":          { "type": "string" },
+              "seats_total":            { "type": "integer" },
+              "seats_state_subsidised": { "type": "integer" },
+              "seats_paid":             { "type": "integer" },
+              "exams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["subject_bg", "weight"],
+                  "properties": {
+                    "subject_bg":   { "type": "string" },
+                    "kind": {
+                      "enum": ["dze", "entry_exam", "diploma_grade", "portfolio", "interview", "other"]
+                    },
+                    "weight":       { "type": "number" },
+                    "is_mandatory": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

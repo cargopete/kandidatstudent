@@ -1,0 +1,71 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT id, slug, canonical_name_bg, canonical_name_en,\n                   professional_field_id, description_bg, created_at, updated_at\n            FROM specialty\n            WHERE ($1::bigint IS NULL OR professional_field_id = $1)\n            ORDER BY canonical_name_bg ASC\n            LIMIT $2 OFFSET $3\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "slug",
+        "type_info": {
+          "Custom": {
+            "name": "citext",
+            "kind": "Simple"
+          }
+        }
+      },
+      {
+        "ordinal": 2,
+        "name": "canonical_name_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "canonical_name_en",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "professional_field_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 5,
+        "name": "description_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 7,
+        "name": "updated_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "25be0ae194a8e580ab38fc6e2230ee405c3591cf8ab621f014c61123927acafa"
+}

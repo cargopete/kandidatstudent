@@ -1,0 +1,259 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT\n                id, slug, institution_id, branch_id, academic_unit_id,\n                specialty_id, professional_field_id,\n                oks_level       AS \"oks_level: _\",\n                study_form      AS \"study_form: _\",\n                language        AS \"language: _\",\n                duration_semesters, ects_credits,\n                tuition_bgn_per_year, tuition_currency,\n                funding         AS \"funding: _\",\n                is_joint, has_internship,\n                title_bg, title_en, description_bg,\n                learning_outcomes_bg, career_prospects_bg,\n                curriculum_url, program_page_url, accreditation_until,\n                is_active, first_seen_at, last_verified_at, created_at, updated_at\n            FROM program_offering\n            WHERE slug = $1\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "slug",
+        "type_info": {
+          "Custom": {
+            "name": "citext",
+            "kind": "Simple"
+          }
+        }
+      },
+      {
+        "ordinal": 2,
+        "name": "institution_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 3,
+        "name": "branch_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "academic_unit_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 5,
+        "name": "specialty_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 6,
+        "name": "professional_field_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 7,
+        "name": "oks_level: _",
+        "type_info": {
+          "Custom": {
+            "name": "oks_level",
+            "kind": {
+              "Enum": [
+                "professional_bachelor",
+                "bachelor",
+                "master",
+                "doctor"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "ordinal": 8,
+        "name": "study_form: _",
+        "type_info": {
+          "Custom": {
+            "name": "study_form",
+            "kind": {
+              "Enum": [
+                "full_time",
+                "part_time",
+                "distance",
+                "evening",
+                "hybrid"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "ordinal": 9,
+        "name": "language: _",
+        "type_info": {
+          "Custom": {
+            "name": "language_code",
+            "kind": {
+              "Enum": [
+                "bg",
+                "en",
+                "de",
+                "fr",
+                "ru",
+                "es",
+                "it",
+                "tr",
+                "other"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "ordinal": 10,
+        "name": "duration_semesters",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 11,
+        "name": "ects_credits",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 12,
+        "name": "tuition_bgn_per_year",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 13,
+        "name": "tuition_currency",
+        "type_info": "Bpchar"
+      },
+      {
+        "ordinal": 14,
+        "name": "funding: _",
+        "type_info": {
+          "Custom": {
+            "name": "funding_source",
+            "kind": {
+              "Enum": [
+                "state_subsidy",
+                "paid",
+                "both"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "ordinal": 15,
+        "name": "is_joint",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 16,
+        "name": "has_internship",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 17,
+        "name": "title_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 18,
+        "name": "title_en",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 19,
+        "name": "description_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 20,
+        "name": "learning_outcomes_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 21,
+        "name": "career_prospects_bg",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 22,
+        "name": "curriculum_url",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 23,
+        "name": "program_page_url",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 24,
+        "name": "accreditation_until",
+        "type_info": "Date"
+      },
+      {
+        "ordinal": 25,
+        "name": "is_active",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 26,
+        "name": "first_seen_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 27,
+        "name": "last_verified_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 28,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 29,
+        "name": "updated_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        {
+          "Custom": {
+            "name": "citext",
+            "kind": "Simple"
+          }
+        }
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "507f89057d1eb8b66f26169aef3fbe08dd0d137731443896c7c0bff26509569f"
+}

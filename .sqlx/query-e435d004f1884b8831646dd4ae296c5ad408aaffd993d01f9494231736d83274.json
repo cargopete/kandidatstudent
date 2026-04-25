@@ -1,0 +1,18 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n                    INSERT INTO admission_cycle\n                        (program_offering_id, academic_year, seats_total,\n                         seats_state_subsidised, seats_paid)\n                    VALUES ($1,$2,$3,$4,$5)\n                    ON CONFLICT (program_offering_id, academic_year) DO UPDATE SET\n                        seats_total            = EXCLUDED.seats_total,\n                        seats_state_subsidised = EXCLUDED.seats_state_subsidised,\n                        seats_paid             = EXCLUDED.seats_paid,\n                        updated_at             = now()\n                    ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text",
+        "Int4",
+        "Int4",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "e435d004f1884b8831646dd4ae296c5ad408aaffd993d01f9494231736d83274"
+}

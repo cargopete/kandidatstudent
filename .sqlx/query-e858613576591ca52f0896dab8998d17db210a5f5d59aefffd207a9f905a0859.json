@@ -1,0 +1,31 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO specialty (slug, canonical_name_bg, canonical_name_en, professional_field_id, description_bg)\n            VALUES ($1,$2,$3,$4,$5)\n            ON CONFLICT (slug) DO UPDATE SET\n                canonical_name_bg = EXCLUDED.canonical_name_bg,\n                canonical_name_en = EXCLUDED.canonical_name_en,\n                professional_field_id = EXCLUDED.professional_field_id,\n                description_bg = EXCLUDED.description_bg,\n                updated_at = now()\n            RETURNING id\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        {
+          "Custom": {
+            "name": "citext",
+            "kind": "Simple"
+          }
+        },
+        "Text",
+        "Text",
+        "Int8",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "e858613576591ca52f0896dab8998d17db210a5f5d59aefffd207a9f905a0859"
+}

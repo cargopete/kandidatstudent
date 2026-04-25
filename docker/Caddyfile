@@ -1,0 +1,30 @@
+{
+    # Global options
+    email admin@kandidatstudent.bg
+
+    # Use Cloudflare DNS-01 challenge for wildcard and behind-proxy domains
+    acme_dns cloudflare {env.CF_API_TOKEN}
+}
+
+api.kandidatstudent.bg {
+    reverse_proxy api:8080
+    header {
+        # Instruct Cloudflare what to cache
+        Cache-Control "public, s-maxage=300, stale-while-revalidate=60"
+    }
+    log {
+        output stdout
+        format json
+    }
+}
+
+admin.kandidatstudent.bg {
+    reverse_proxy admin:8081
+    header {
+        Cache-Control "no-store"
+    }
+    log {
+        output stdout
+        format json
+    }
+}

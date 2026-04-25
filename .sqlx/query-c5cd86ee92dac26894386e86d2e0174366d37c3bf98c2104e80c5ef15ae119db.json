@@ -1,0 +1,17 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO program_override (program_offering_id, field_name, override_value, reason)\n        VALUES ($1, $2, $3, $4)\n        ON CONFLICT (program_offering_id, field_name) DO UPDATE SET\n            override_value = EXCLUDED.override_value,\n            reason         = EXCLUDED.reason,\n            applied_at     = now()\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "c5cd86ee92dac26894386e86d2e0174366d37c3bf98c2104e80c5ef15ae119db"
+}

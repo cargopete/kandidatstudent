@@ -1,0 +1,92 @@
+[workspace]
+resolver = "2"
+members  = [
+    "crates/domain",
+    "crates/persistence",
+    "crates/search",
+    "crates/api",
+    "crates/admin",
+    "crates/scraper-core",
+    "crates/scraper-bg",
+    "crates/jobs",
+    "crates/cli",
+]
+
+[workspace.package]
+edition      = "2024"
+rust-version = "1.88"
+version      = "0.1.0"
+license      = "AGPL-3.0-or-later"
+
+[workspace.dependencies]
+# Runtime & tracing
+tokio              = { version = "1.40", features = ["full"] }
+tracing            = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+tower              = { version = "0.5", features = ["util"] }
+tower-http         = { version = "0.6", features = [
+    "cors", "trace", "compression-gzip", "timeout", "set-header", "request-id"
+] }
+
+# HTTP
+axum           = { version = "0.8", features = ["macros", "http2"] }
+hyper          = { version = "1.4" }
+tower_governor = { version = "0.8", features = ["axum"] }
+axum-extra     = { version = "0.10", features = ["typed-header"] }
+
+# Persistence
+sqlx = { version = "0.8", default-features = false, features = [
+    "runtime-tokio", "tls-rustls-aws-lc-rs",
+    "postgres", "macros", "migrate",
+    "chrono", "uuid", "rust_decimal", "json",
+] }
+
+# Search
+meilisearch-sdk = "0.30"
+
+# Scraping
+reqwest  = { version = "0.12", default-features = false, features = [
+    "rustls-tls", "gzip", "brotli", "cookies", "json", "stream"
+] }
+scraper  = "0.20"
+select   = "0.6"
+url      = "2.5"
+robotstxt = "0.3"
+
+# Jobs
+apalis               = { version = "0.7", features = ["tracing", "retry"] }
+apalis-cron          = "0.7"
+tokio-cron-scheduler = "0.13"
+
+# Object storage
+aws-config   = "1.5"
+aws-sdk-s3   = "1.51"
+bytes        = "1.7"
+
+# OpenAPI
+utoipa          = { version = "5.2", features = [
+    "axum_extras", "chrono", "uuid", "decimal", "preserve_order"
+] }
+utoipa-axum       = "0.2"
+
+# Misc
+serde          = { version = "1.0", features = ["derive"] }
+serde_json     = "1.0"
+serde_with     = "3.9"
+chrono         = { version = "0.4", features = ["serde"] }
+uuid           = { version = "1.10", features = ["v7", "serde"] }
+rust_decimal   = { version = "1.36", features = ["serde-str", "db-postgres"] }
+thiserror      = "1.0"
+anyhow         = "1.0"
+validator      = { version = "0.18", features = ["derive"] }
+argon2         = "0.5"
+constant_time_eq = "0.3"
+secrecy        = "0.10"
+moka           = { version = "0.12", features = ["future"] }
+config         = "0.14"
+dotenvy        = "0.15"
+jsonschema     = "0.26"
+async-trait    = "0.1"
+slug           = "0.1"
+sha2           = "0.10"
+hex            = "0.4"

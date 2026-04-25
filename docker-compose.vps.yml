@@ -1,0 +1,17 @@
+# VPS overlay: removes Caddy (native Caddy handles TLS), exposes API/admin on host ports,
+# keeps postgres internal, removes the public postgres port from base compose.
+services:
+  caddy:
+    profiles: ["disabled"]   # never started
+
+  postgres:
+    ports: []   # internal only — native Caddy can't reach Docker network directly, but
+                # api/admin/worker can reach postgres over kandidatstudent_net
+
+  api:
+    ports:
+      - "127.0.0.1:8082:8080"
+
+  admin:
+    ports:
+      - "127.0.0.1:8083:8081"

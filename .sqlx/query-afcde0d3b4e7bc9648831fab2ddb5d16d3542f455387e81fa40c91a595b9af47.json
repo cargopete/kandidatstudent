@@ -1,0 +1,12 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO institution (slug, name_bg, name_en, short_name_bg, ownership, city, website_url, admissions_url)\n        VALUES (\n            'su-kliment-ohridski',\n            'Софийски университет „Св. Климент Охридски\"',\n            'Sofia University \"St. Kliment Ohridski\"',\n            'СУ',\n            'state',\n            'София',\n            'https://www.uni-sofia.bg',\n            'https://www.uni-sofia.bg/index.php/bul/universitett/struktura/priem'\n        )\n        ON CONFLICT (slug) DO NOTHING\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": []
+  },
+  "hash": "afcde0d3b4e7bc9648831fab2ddb5d16d3542f455387e81fa40c91a595b9af47"
+}

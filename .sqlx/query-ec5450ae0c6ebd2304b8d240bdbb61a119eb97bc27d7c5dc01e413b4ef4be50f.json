@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "DELETE FROM program_override WHERE program_offering_id = $1 AND field_name = $2",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "ec5450ae0c6ebd2304b8d240bdbb61a119eb97bc27d7c5dc01e413b4ef4be50f"
+}

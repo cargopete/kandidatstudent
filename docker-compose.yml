@@ -1,0 +1,166 @@
+name: kandidatstudent
+
+services:
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+    networks:
+      - kandidatstudent_net
+
+  postgres:
+    build:
+      context: ./docker/postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       kandidatstudent
+      POSTGRES_USER:     kandidatstudent
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kandidatstudent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kandidatstudent_net
+
+  meili:
+    image: getmeili/meilisearch:v1.11
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY:        ${MEILI_MASTER_KEY}
+      MEILI_ENV:               production
+    volumes:
+      - meili:/meili_data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:7700/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kandidatstudent_net
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      meili:
+        condition: service_healthy
+    environment:
+      DATABASE_URL:      postgres://kandidatstudent:${POSTGRES_PASSWORD}@postgres:5432/kandidatstudent
+      MEILI_URL:         http://meili:7700
+      MEILI_MASTER_KEY:  ${MEILI_MASTER_KEY}
+      APP_ENV:           production
+      RUST_LOG:          kandidatstudent_api=info,tower_http=info
+    networks:
+      - kandidatstudent_net
+
+  admin:
+    build:
+      context: .
+      dockerfile: docker/admin/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      meili:
+        condition: service_healthy
+    environment:
+      DATABASE_URL:          postgres://kandidatstudent:${POSTGRES_PASSWORD}@postgres:5432/kandidatstudent
+      MEILI_URL:             http://meili:7700
+      MEILI_MASTER_KEY:      ${MEILI_MASTER_KEY}
+      ADMIN_BEARER_TOKEN:    ${ADMIN_BEARER_TOKEN}
+      VERCEL_REVALIDATE_URL: ${VERCEL_REVALIDATE_URL}
+      VERCEL_REVALIDATE_SECRET: ${VERCEL_REVALIDATE_SECRET}
+      RUST_LOG:              kandidatstudent_admin=info,tower_http=info
+    networks:
+      - kandidatstudent_net
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/worker/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      meili:
+        condition: service_healthy
+    environment:
+      DATABASE_URL:       postgres://kandidatstudent:${POSTGRES_PASSWORD}@postgres:5432/kandidatstudent
+      MEILI_URL:          http://meili:7700
+      MEILI_MASTER_KEY:   ${MEILI_MASTER_KEY}
+      ADMIN_API_URL:      http://admin:8081
+      ADMIN_BEARER_TOKEN: ${ADMIN_BEARER_TOKEN}
+      S3_BUCKET:          ${S3_BUCKET}
+      S3_ENDPOINT:        ${S3_ENDPOINT}
+      S3_REGION:          ${S3_REGION}
+      AWS_ACCESS_KEY_ID:  ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      RUST_LOG:           kandidatstudent_worker=info
+    networks:
+      - kandidatstudent_net
+
+  scraper-py:
+    image: mcr.microsoft.com/playwright/python:v1.58-noble
+    restart: unless-stopped
+    command: ["python", "-m", "scraper_py"]
+    working_dir: /app
+    volumes:
+      - ./scraper-py:/app:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://kandidatstudent:${POSTGRES_PASSWORD}@postgres:5432/kandidatstudent
+    networks:
+      - kandidatstudent_net
+    profiles:
+      - playwright   # start only when explicitly needed
+
+  pgbackup:
+    image: prodrigestivill/postgres-backup-local
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_HOST:     postgres
+      POSTGRES_DB:       kandidatstudent
+      POSTGRES_USER:     kandidatstudent
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      SCHEDULE:          "@daily"
+      BACKUP_KEEP_DAYS:  7
+      BACKUP_KEEP_WEEKS: 4
+      BACKUP_KEEP_MONTHS: 6
+      # S3 push via post-hook (configured separately)
+    volumes:
+      - pgbackups:/backups
+    networks:
+      - kandidatstudent_net
+
+volumes:
+  pgdata:
+  meili:
+  caddy_data:
+  caddy_config:
+  pgbackups:
+
+networks:
+  kandidatstudent_net:
+    driver: bridge

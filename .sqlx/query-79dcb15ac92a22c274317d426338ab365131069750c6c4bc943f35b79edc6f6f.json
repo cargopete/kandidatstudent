@@ -1,0 +1,103 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT id, kind AS \"kind: _\", target_url, institution_id,\n                   cron_expr, runner, priority, is_enabled,\n                   last_run_at, next_run_at, created_at, updated_at\n            FROM scrape_job\n            WHERE is_enabled = TRUE\n            ORDER BY priority ASC, id ASC\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "kind: _",
+        "type_info": {
+          "Custom": {
+            "name": "scrape_job_kind",
+            "kind": {
+              "Enum": [
+                "institution_list",
+                "institution_detail",
+                "faculty_list",
+                "program_list",
+                "program_detail",
+                "admission_cycle",
+                "min_bal_history",
+                "rsvu_outcomes",
+                "nacid_dataset"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "ordinal": 2,
+        "name": "target_url",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "institution_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "cron_expr",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "runner",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "priority",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 7,
+        "name": "is_enabled",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 8,
+        "name": "last_run_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 9,
+        "name": "next_run_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 10,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 11,
+        "name": "updated_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "79dcb15ac92a22c274317d426338ab365131069750c6c4bc943f35b79edc6f6f"
+}

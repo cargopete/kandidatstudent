@@ -579,3 +579,24 @@ SELECT 'organizatsiya-i-upravlenie-na-voenni-formirovaniya', 'Организац
 ON CONFLICT (slug) DO NOTHING;
 
 SELECT count(*) AS specialties_total FROM specialty;
+
+-- Corrections: fix arts PF code mismatches (applied 2026-04-25)
+-- 8.2 = Изобразително изкуство (fine arts + design)
+UPDATE specialty SET professional_field_id = (SELECT id FROM professional_field WHERE code = '8.2')
+  WHERE slug IN ('izobrazitelno-izkustvo','grafika','skulptura','fotografiya','dizain','mode-dizain');
+-- 8.3 = Музикално и танцово изкуство
+UPDATE specialty SET professional_field_id = (SELECT id FROM professional_field WHERE code = '8.3')
+  WHERE slug IN ('muzika','horeografiya','tsirkovo-izkustvo');
+
+INSERT INTO specialty (slug, canonical_name_bg, canonical_name_en, professional_field_id)
+SELECT 'teoriya-na-izkustvata','Теория на изкуствата','Theory of Arts', id FROM professional_field WHERE code='8.1' ON CONFLICT (slug) DO NOTHING;
+INSERT INTO specialty (slug, canonical_name_bg, canonical_name_en, professional_field_id)
+SELECT 'izkustvoznanie','Изкуствознание','Art Studies', id FROM professional_field WHERE code='8.1' ON CONFLICT (slug) DO NOTHING;
+INSERT INTO specialty (slug, canonical_name_bg, canonical_name_en, professional_field_id)
+SELECT 'gorsko-stopanstvo','Горско стопанство','Forestry', id FROM professional_field WHERE code='6.5' ON CONFLICT (slug) DO NOTHING;
+INSERT INTO specialty (slug, canonical_name_bg, canonical_name_en, professional_field_id)
+SELECT 'fizichesko-vazpitanie-i-sport','Физическо възпитание и спорт','Physical Education and Sport', id FROM professional_field WHERE code='7.6' ON CONFLICT (slug) DO NOTHING;
+INSERT INTO specialty (slug, canonical_name_bg, canonical_name_en, professional_field_id)
+SELECT 'trenioryorstvo','Треньорство','Coaching', id FROM professional_field WHERE code='7.6' ON CONFLICT (slug) DO NOTHING;
+INSERT INTO specialty (slug, canonical_name_bg, canonical_name_en, professional_field_id)
+SELECT 'arhitektura-8-5','Архитектура','Architecture', id FROM professional_field WHERE code='8.5' ON CONFLICT (slug) DO NOTHING;

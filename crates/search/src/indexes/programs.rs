@@ -62,6 +62,7 @@ pub struct ProgramDoc {
     pub title_en:                 Option<String>,
     pub description_bg:           Option<String>,
     pub career_prospects_bg:      Option<String>,
+    pub specialty_slug:           String,
     pub specialty_name_bg:        String,
     pub institution_slug:         String,
     pub institution_name_bg:      String,

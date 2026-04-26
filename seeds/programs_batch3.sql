@@ -27,14 +27,6 @@ SELECT 'su-germanska-filologiya-bak-rd',
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO program_offering (slug,institution_id,specialty_id,professional_field_id,oks_level,study_form,language,duration_semesters,ects_credits,tuition_bgn_per_year,funding,title_bg,title_en)
-SELECT 'su-romanska-filologiya-bak-rd',
-  (SELECT id FROM institution WHERE slug='su-sofia'),
-  (SELECT id FROM specialty WHERE slug='romanska-filologiya'),
-  (SELECT id FROM professional_field WHERE code='2.1'),
-  'bachelor','full_time','bg',8,240,750.00,'both','Романска филология','Romance Philology'
-ON CONFLICT (slug) DO NOTHING;
-
-INSERT INTO program_offering (slug,institution_id,specialty_id,professional_field_id,oks_level,study_form,language,duration_semesters,ects_credits,tuition_bgn_per_year,funding,title_bg,title_en)
 SELECT 'su-klasicheska-filologiya-bak-rd',
   (SELECT id FROM institution WHERE slug='su-sofia'),
   (SELECT id FROM specialty WHERE slug='klasicheska-filologiya'),

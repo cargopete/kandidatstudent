@@ -78,10 +78,6 @@ SELECT 'germanska-filologiya', 'Германска филология', 'German 
        id FROM professional_field WHERE code = '2.1'
 ON CONFLICT (slug) DO NOTHING;
 INSERT INTO specialty (slug, canonical_name_bg, canonical_name_en, professional_field_id)
-SELECT 'romanska-filologiya', 'Романска филология', 'Romance Philology',
-       id FROM professional_field WHERE code = '2.1'
-ON CONFLICT (slug) DO NOTHING;
-INSERT INTO specialty (slug, canonical_name_bg, canonical_name_en, professional_field_id)
 SELECT 'ruska-filologiya', 'Руска филология', 'Russian Philology',
        id FROM professional_field WHERE code = '2.1'
 ON CONFLICT (slug) DO NOTHING;
